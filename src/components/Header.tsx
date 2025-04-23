@@ -23,7 +23,7 @@ const Header = ({ darkMode, toggleDarkMode }: HeaderProps) => {
     ];
 
     return (
-        <header className={`sticky top-0 z-50 ${darkMode ? 'bg-dark' : 'bg-white'} shadow-md`}>
+        <header className={`sticky top-0 z-50 ${darkMode ? 'bg-black' : 'bg-white'} shadow-md`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center py-4">
                     <div className="flex items-center">

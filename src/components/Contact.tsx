@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Phone, Github, Linkedin } from 'lucide-react';
+import { Mail, Phone, Github, Linkedin, Loader } from 'lucide-react';
 
 interface ContactProps {
     darkMode: boolean;
@@ -11,7 +11,7 @@ const Contact = ({ darkMode }: ContactProps) => {
         email: '',
         message: '',
     });
-
+    const [status, setStatus] = useState<string>("Send Message")
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData({
@@ -20,16 +20,31 @@ const Contact = ({ darkMode }: ContactProps) => {
         });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // In a real app, you would handle form submission to a backend service
-        console.log('Form submitted:', formData);
-        alert('Thanks for your message! I will get back to you soon.');
-        setFormData({
-            name: '',
-            email: '',
-            message: '',
-        });
+        setStatus("Sending...");
+
+        try {
+            const res = await fetch("https://us-central1-yourproject.cloudfunctions.net/sendContactEmail", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            if (res.ok) {
+                setStatus("Message sent!");
+                setFormData({ name: "", email: "", message: "" });
+            } else {
+                setStatus("Failed to send message.");
+            }
+        } catch (err) {
+            setStatus("Error sending message.");
+        }
+        finally {
+            setTimeout(() => {
+                setStatus('Send Message')
+            }, 1000)
+        }
     };
 
     const contactLinks = [
@@ -48,13 +63,13 @@ const Contact = ({ darkMode }: ContactProps) => {
         {
             icon: <Github size={24} />,
             text: 'Github',
-            href: 'https://github.com/',
+            href: 'https://github.com/IamXDeepak',
             label: 'Github'
         },
         {
             icon: <Linkedin size={24} />,
             text: 'LinkedIn',
-            href: 'https://linkedin.com/in/',
+            href: 'www.linkedin.com/in/iam-deepak-s',
             label: 'LinkedIn'
         },
     ];
@@ -154,12 +169,12 @@ const Contact = ({ darkMode }: ContactProps) => {
                         </div>
                         <button
                             type="submit"
-                            className={`px-6 py-3 rounded-lg font-medium ${darkMode
+                            className={`px-6 py-3 rounded-lg font-medium flex flex-row items-center justify-center ${darkMode
                                 ? 'bg-blue-600 hover:bg-blue-700 text-white'
                                 : 'bg-blue-600 hover:bg-blue-700 text-white'
                                 } transition-colors`}
                         >
-                            Send Message
+                            {status == 'Sending...' && <Loader className='mr-2' size={20} />} {status}
                         </button>
                     </form>
                 </div>
