@@ -23,14 +23,14 @@ const Footer = ({ darkMode }: FooterProps) => {
                             Email
                         </a>
                         <a
-                            href="https://github.com/"
+                            href="https://github.com/IamXDeepak"
                             className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-blue-600'}`}
                             aria-label="GitHub"
                         >
                             GitHub
                         </a>
                         <a
-                            href="https://linkedin.com/in/"
+                            href="www.linkedin.com/in/iam-deepak-s"
                             className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-blue-600'}`}
                             aria-label="LinkedIn"
                         >
