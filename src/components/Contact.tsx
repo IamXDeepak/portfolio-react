@@ -69,7 +69,7 @@ const Contact = ({ darkMode }: ContactProps) => {
         {
             icon: <Linkedin size={24} />,
             text: 'LinkedIn',
-            href: 'www.linkedin.com/in/iam-deepak-s',
+            href: 'https://www.linkedin.com/in/iam-deepak-s',
             label: 'LinkedIn'
         },
     ];
