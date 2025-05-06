@@ -30,7 +30,7 @@ const Footer = ({ darkMode }: FooterProps) => {
                             GitHub
                         </a>
                         <a
-                            href="www.linkedin.com/in/iam-deepak-s"
+                            href="https://www.linkedin.com/in/iam-deepak-s"
                             className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-blue-600'}`}
                             aria-label="LinkedIn"
                         >
